@@ -1,7 +1,7 @@
 <%-- 
-    Document   : login
-    Created on : Dec 7, 2012, 4:46:09 PM
-    Author     : miguez
+    Document   : manageTicket
+    Created on : 06-feb-2013, 1:00:44
+    Author     : meme
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Login Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        
+        <h1>Hello World!</h1>
     </body>
 </html>
