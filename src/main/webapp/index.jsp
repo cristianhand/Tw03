@@ -13,7 +13,16 @@
     </head>
     <body>
         <h1 align="center"> Welcome </h1>        
-        <form method="POST" action="home.jsp">
+        <form  method="POST" action="/Tw03/login">
+            <h2 align="center"> 
+                <%   String logParameter = request.getParameter("error");
+                    if (logParameter == null) {
+                    } else {
+                        out.print(logParameter);
+                    }
+                %>
+            </h2>
+
             <table border="0" align="center">
                 <tbody>
                     <tr>
@@ -26,7 +35,7 @@
                     </tr>
                     <tr align="center">
                         <td></td>
-                        <td><input type="submit" value="Sig In" /></td>
+                        <td><input type="submit" value="Sign In" /></td>
                     </tr>
                 </tbody>
             </table>
