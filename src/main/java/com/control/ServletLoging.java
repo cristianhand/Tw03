@@ -42,18 +42,18 @@ public class ServletLoging extends HttpServlet {
         ManageTicket manageTicket = new ManageTicket();
         HttpSession sesion = request.getSession(true);
         ArrayList<Ticket> tList = new ArrayList<Ticket>();
-        TupleClass t = new TupleClass();
+        TupleClass tPassId = new TupleClass();
         
         try {
-            t = loginAcces.getPasswordId(request.getParameter("txtUserName"));
-            if (!t.getStr().isEmpty()
-                    && request.getParameter("txtPassword").equals(t.getStr())) {
-                tList = manageTicket.getTicketList(t.getI());
+            tPassId = loginAcces.getPasswordId(request.getParameter("txtUserName"));
+            if (!tPassId.getStr().isEmpty()
+                    && request.getParameter("txtPassword").equals(tPassId.getStr())) {
+                tList = manageTicket.getTicketList(tPassId.getI());
 
                 sesion.setAttribute("servletTicketList", tList);
                 response.sendRedirect("/Tw03/home.jsp");
             } else {
-                if (t.getStr().equals("")) {
+                if (tPassId.getStr().equals("")) {
                     request.setAttribute("error", "LoginFail");
                     response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect "
                             + "username, please try again");
