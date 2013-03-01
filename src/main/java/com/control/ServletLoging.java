@@ -4,7 +4,7 @@
  */
 package com.control;
 
-import Entity.Ticket;
+import entity.Ticket;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -4,7 +4,7 @@
  */
 package com.control;
 
-import Entity.Ticket;
+import entity.Ticket;
 import java.awt.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

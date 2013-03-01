@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="entity.Ticket" table="ticket">"
+        <id name="ticketId" column="TicketId">
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string" column="Description"/>
+        <property name="openDate" column="OpenDate"/>
+        <property name="closeDate" column="CloseDate"/>
+        <property name="status" column="Status"/>
+        <property name="assignedTo" column="AssignedTo"/>
+        <property name="severity" column="Severity"/>
+        <property name="attachments" column="Attachments"/>
+    </class>
+</hibernate-mapping>
