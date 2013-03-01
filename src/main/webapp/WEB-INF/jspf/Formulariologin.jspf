@@ -1,0 +1,18 @@
+<form  method="POST" action="/Tw03/login">
+    <table border="0" align="center">
+        <tbody>
+            <tr>
+                <td>User Name</td>
+                <td><input type="text" name="txtUserName" value="" /></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="text" name="txtPassword" value="" /></td>
+            </tr>
+            <tr align="center">
+                <td></td>
+                <td><input type="submit" value="Sign In" /></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
