@@ -32,11 +32,11 @@ public class LoginAcces {
             pstmt.setString(1,username);
             rs = pstmt.executeQuery();
             rs.next();
-            System.out.println("Esta es la password " + rs.getString(1));
-            System.out.println("Esta es el Id " + rs.getInt(2));
+            //System.out.println("Esta es la password " + rs.getString(1));
+            //System.out.println("Esta es el Id " + rs.getInt(2));
             t.setStr(rs.getString("password"));
             t.setI(rs.getInt("UserId"));
-            System.out.println(t.toString());
+            //System.out.println(t.toString());
         } 
         catch (SQLException ex) {
             ex.printStackTrace();
