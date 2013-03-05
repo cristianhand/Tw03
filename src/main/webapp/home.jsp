@@ -1,13 +1,13 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- 
-    Document   : home
-    Created on : 06-feb-2013, 1:00:44
+    Document   : index
+    Created on : 06-feb-2013, 0:26:46
     Author     : meme
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Entity.Ticket"%>
+<%@page import="entity.Ticket"%>
 <%@page import="com.control.ManageTicket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

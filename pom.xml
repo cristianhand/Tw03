@@ -15,12 +15,18 @@
     </properties>
 
     <dependencies>
-        <!-- Hibernate Dependency-->
+        <!-- Hibernate Dependency -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
             <version>3.2.5.ga</version>
-            <type>pom</type>
+            <!-- <type>pom</type>
+             <exclusions>
+                <exclusion>
+                    <artifactId>jta</artifactId>
+                    <groupId>javax.transaction</groupId>
+                </exclusion>
+            </exclusions> -->
         </dependency>
         
         <dependency>
@@ -34,27 +40,32 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
             <version>3.5.6-Final</version>
+            <exclusions>
+                
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-commons-annotations</artifactId>
             <version>3.3.0.ga</version>
+            <exclusions>
+                
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>3.3.2.GA</version>
         </dependency>
-        <dependency>
-            <groupId>javax.sql</groupId>
-            <artifactId>jdbc-stdext</artifactId>
-            <version>2.0</version>
-        </dependency>
+        
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.0.1B</version>
+            
+            <scope>compile</scope>
         </dependency>
+        
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
@@ -79,8 +90,12 @@
         
     </dependencies>
     
-    
-
+    <repositories>
+        <repository>
+            <id>java.net</id>
+            <url>http://download.java.net/maven/2/</url>
+        </repository>
+    </repositories>
     
     
 

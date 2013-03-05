@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistence;
+package persistence;
 
 import org.hibernate.HibernateException;
 import org.hibernate.SessionFactory;
@@ -12,7 +12,7 @@ import org.hibernate.cfg.Configuration;
  *
  * @author meme
  */
-public class HibernateUtil {
+public class HibernateUtils {
 
     private static final SessionFactory sessionFactory;
 
@@ -22,7 +22,6 @@ public class HibernateUtil {
         } 
         catch (HibernateException he) {
             System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
-            he.getMessage();
             throw new ExceptionInInitializerError(he);
         }
     }

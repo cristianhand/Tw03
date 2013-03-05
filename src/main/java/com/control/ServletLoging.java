@@ -4,8 +4,8 @@
  */
 package com.control;
 
-import Persistence.GenericDAO;
-import Persistence.TicketDAO;
+import persistence.GenericDAO;
+import persistence.TicketDAO;
 import entity.Ticket;
 import entity.User;
 import java.io.IOException;
@@ -41,7 +41,8 @@ public class ServletLoging extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //response.setContentType("text/html;charset=UTF-8");
+        System.err.println("Estamos en ServletLogin");
+        System.out.println("Estamos en ServletLogin");
         LoginAcces loginAcces = new LoginAcces();
         ManageTicket manageTicket = new ManageTicket();
         HttpSession sesion = request.getSession(true);
@@ -59,25 +60,26 @@ public class ServletLoging extends HttpServlet {
 
         try {
             // falta un DAO para usuarios
-            user = (User) gDao.getObjectByString(request.getParameter("txtUserName"));
+            user = (User) gDao.getObjectByString(request.getParameter("txtUserName"), "userName", User.class);
+            System.out.println(user.userToString());
             if (user != null && user.getPassword() != null) {
-                objectList = gDao.getObjectList("ticket");
+                objectList = gDao.getObjectList("Ticket");
                 sesion.setAttribute("servletTicketList", objectList);
                 response.sendRedirect("/Tw03/home.jsp");
             } else {
                 if (user.getPassword().equals("")) {
                     request.setAttribute("error", "LoginFail");
-                    response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect "
+                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
                             + "username, please try again");
                     // Utilizando Formularios jspf
                     // <%@ include file="WEB-INF/jspf/formulariologin.jspf" %>
                 } else {
-                    response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect "
+                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
                             + "password, please try again");
                 }
             }
         } catch (Exception ex) {
-            //ex.printStackTrace();
+            ex.printStackTrace();
             ex.getMessage();
         }
 
@@ -129,29 +131,3 @@ public class ServletLoging extends HttpServlet {
     }// </editor-fold>
 }
 
-
-
-
-
-            /**
-             * tPassId =
-             * loginAcces.getPasswordId(request.getParameter("txtUserName")); if
-             * (!tPassId.getStr().isEmpty() &&
-             * request.getParameter("txtPassword").equals(tPassId.getStr())) {
-             * tList = manageTicket.getTicketList(tPassId.getI());
-             *
-             * sesion.setAttribute("servletTicketList", tList);
-             * response.sendRedirect("/Tw03/home.jsp"); } else { if
-             * (tPassId.getStr().equals("")) { request.setAttribute("error",
-             * "LoginFail"); response.sendRedirect("/Tw03/index.jsp" +
-             * "?error=Incorrect " + "username, please try again"); //
-             * Utilizando Formularios jspf // <%@ include
-             * file="WEB-INF/jspf/formulariologin.jspf" %> } else {
-             * response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect " +
-             * "password, please try again"); } } } catch (Exception ex) {
-             * ex.printStackTrace(); ex.getMessage(); }
-        *catch (Exception ex) {
-            ex.printStackTrace();
-            ex.getMessage();
-        }
-             */
