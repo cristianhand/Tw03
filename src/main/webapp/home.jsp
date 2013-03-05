@@ -7,7 +7,7 @@
 
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="Entity.Ticket"%>
+<%@page import="com.entity.Ticket"%>
 <%@page import="com.control.ManageTicket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

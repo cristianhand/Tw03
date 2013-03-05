@@ -4,23 +4,17 @@
  */
 package com.control;
 
-import Persistence.GenericDAO;
-import Persistence.TicketDAO;
-import entity.Ticket;
-import entity.User;
+import com.persistence.TicketDAO;
+import com.persistence.UserDAO;
+import com.entity.Ticket;
+import com.entity.User;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import javax.persistence.Tuple;
-
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utilities.TupleClass; // SIN USO ACTUAL
 
 /**
  *
@@ -42,49 +36,36 @@ public class ServletLoging extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
-        LoginAcces loginAcces = new LoginAcces();
-        ManageTicket manageTicket = new ManageTicket();
         HttpSession sesion = request.getSession(true);
-        ArrayList<Ticket> tList = new ArrayList<Ticket>();
-        TupleClass tPassId = new TupleClass();
-        TupleClass t = new TupleClass();
 
-        //Ticket ticket = new Ticket();
-        //TicketDAO td = new TicketDAO();
-        //List<Ticket> ticketList = null;
-        
         User user = null;
-        GenericDAO gDao = new GenericDAO();
-        List<Object> objectList = null;
+        UserDAO ud = new UserDAO();
+        TicketDAO td = new TicketDAO();
+        List<Ticket> tl = null;
 
         try {
-            // falta un DAO para usuarios
-            user = (User) gDao.getObjectByString(request.getParameter("txtUserName"));
+            user = ud.searchUserbyUserName(request.getParameter("txtUserName"), "userName");
+            System.err.println("PLPLPLPLPLPL");
             if (user != null && user.getPassword() != null) {
-                objectList = gDao.getObjectList("ticket");
-                sesion.setAttribute("servletTicketList", objectList);
+                tl = td.getTicketList();
+                sesion.setAttribute("servletTicketList", tl);
                 response.sendRedirect("/Tw03/home.jsp");
             } else {
                 if (user.getPassword().equals("")) {
                     request.setAttribute("error", "LoginFail");
-                    response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect "
+                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
                             + "username, please try again");
                     // Utilizando Formularios jspf
                     // <%@ include file="WEB-INF/jspf/formulariologin.jspf" %>
                 } else {
-                    response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect "
+                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
                             + "password, please try again");
                 }
             }
         } catch (Exception ex) {
-            //ex.printStackTrace();
+            ex.printStackTrace();
             ex.getMessage();
         }
-
-
-
-
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -128,30 +109,3 @@ public class ServletLoging extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
-
-
-
-
-
-            /**
-             * tPassId =
-             * loginAcces.getPasswordId(request.getParameter("txtUserName")); if
-             * (!tPassId.getStr().isEmpty() &&
-             * request.getParameter("txtPassword").equals(tPassId.getStr())) {
-             * tList = manageTicket.getTicketList(tPassId.getI());
-             *
-             * sesion.setAttribute("servletTicketList", tList);
-             * response.sendRedirect("/Tw03/home.jsp"); } else { if
-             * (tPassId.getStr().equals("")) { request.setAttribute("error",
-             * "LoginFail"); response.sendRedirect("/Tw03/index.jsp" +
-             * "?error=Incorrect " + "username, please try again"); //
-             * Utilizando Formularios jspf // <%@ include
-             * file="WEB-INF/jspf/formulariologin.jspf" %> } else {
-             * response.sendRedirect("/Tw03/index.jsp" + "?error=Incorrect " +
-             * "password, please try again"); } } } catch (Exception ex) {
-             * ex.printStackTrace(); ex.getMessage(); }
-        *catch (Exception ex) {
-            ex.printStackTrace();
-            ex.getMessage();
-        }
-             */

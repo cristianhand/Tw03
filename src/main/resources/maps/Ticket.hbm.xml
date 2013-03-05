@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="entity.Ticket" table="ticket">"
+    <class name="com.entity.Ticket" table="ticket">
         <id name="ticketId" column="TicketId">
             <generator class="identity" />
         </id>

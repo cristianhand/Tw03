@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Persistence;
+package com.persistence;
 
-import entity.Ticket;
+import com.entity.Ticket;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
