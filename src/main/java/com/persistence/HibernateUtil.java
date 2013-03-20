@@ -19,16 +19,20 @@ public class HibernateUtil {
     static {
         try {
             sessionFactory = new Configuration().configure().buildSessionFactory();
-        } 
-        catch (HibernateException he) {
-            System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
-            he.getMessage();
-            throw new ExceptionInInitializerError(he);
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new ExceptionInInitializerError(e);
         }
+
+        /* catch (HibernateException he) {
+         System.err.println("Ocurrió un error en la inicialización de la SessionFactory: " + he);
+         //he.getMessage();
+         throw new ExceptionInInitializerError(he);
+         */
     }
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-    
 }

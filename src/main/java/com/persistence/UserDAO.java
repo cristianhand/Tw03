@@ -43,7 +43,9 @@ public class UserDAO {
             manejaExcepcion(he);
             throw he;
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return id;
     }
@@ -57,7 +59,9 @@ public class UserDAO {
             manejaExcepcion(he);
             throw he;
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -70,7 +74,9 @@ public class UserDAO {
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
     }
 
@@ -83,7 +89,9 @@ public class UserDAO {
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return user;
     }
@@ -94,13 +102,15 @@ public class UserDAO {
         try {
             iniciaOperacion();
             Criteria criteria = session.createCriteria(User.class);
-            criteria.add(Restrictions.eq(columName,userName));
+            criteria.add(Restrictions.eq(columName, userName));
             List results = criteria.list();
-            user = (User)results.get(0);
+            user = (User) results.get(0);
         } catch (HibernateException he) {
             manejaExcepcion(he);
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return user;
     }
@@ -112,7 +122,9 @@ public class UserDAO {
             iniciaOperacion();
             userList = session.createQuery("from User").list();
         } finally {
-            session.close();
+            if (session != null) {
+                session.close();
+            }
         }
         return userList;
     }
