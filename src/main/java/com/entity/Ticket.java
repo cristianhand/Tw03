@@ -4,15 +4,15 @@
  */
 package com.entity;
 
+import java.io.Serializable;
 import java.util.Date;
-
-
 
 /**
  *
  * @author meme
  */
-public class Ticket {
+public class Ticket implements Serializable {
+
     private int ticketId;
     private String description;
     private Date openDate;
@@ -24,7 +24,7 @@ public class Ticket {
 
     public Ticket() {
     }
-    
+
     public int getTicketId() {
         return ticketId;
     }
@@ -88,7 +88,13 @@ public class Ticket {
     public void setAttachments(int attachments) {
         this.attachments = attachments;
     }
-    
-    
-    
+
+    public String tTS() {
+        String ret = "";
+
+        System.out.println("Ticketid: " + ticketId);
+        System.out.println("Ticket description: " + description);
+
+        return ret;
+    }
 }

@@ -8,7 +8,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.entity.Ticket"%>
-<%@page import="com.control.ManageTicket"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -25,11 +24,11 @@
         </div>
 
         <div id="leftPanel" style="float: left; width: 170px; height: 100px; border: 1px solid"> 
-            <input type="submit" value="Search"/>
-            
-            <input type="text" name="txtSearch" value="" maxlength="20">
+            <form metod="POST" action="/Tw03/SearchTicket.jsp">
+                <input type="submit" value="Search"/>
+            </form>
             <div style="margin: 20px"> 
-                
+
             </div> 
         </div>
 
