@@ -8,7 +8,6 @@ import com.entity.Ticket;
 import com.persistence.TicketDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,28 +22,52 @@ public class ServletSearchTicket extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        HttpSession sesion = request.getSession(true);
-        Ticket tk = new Ticket();
-        TicketDAO tD = new TicketDAO();
-        int ticketId = 0;
+        HttpSession session = request.getSession(false);
+        String idT = request.getParameter("ticketSearch");
 
-        try {
-            ticketId = Integer.parseInt(request.getParameter("ticketSearch"));
-            System.err.println("Numero de ticket a buscar" + ticketId);
-            tk = (Ticket) tD.searchTicketId(ticketId);
-            sesion.setAttribute("currentTk", tk);
-            System.err.println(tk.tTS());
-            response.sendRedirect("/Tw03/SearchTicket.jsp");
-        } catch (NumberFormatException fe) {
-            fe.printStackTrace();
-            fe.getMessage();
-        } catch (HibernateException he) {
-            he.printStackTrace();
-            he.getMessage();
-        } catch (Exception e) {
-            e.printStackTrace();
-            e.getMessage();
+
+        if (session == null) {
+            // Not created yet. Now do so yourself.
+            response.sendRedirect("/Tw03/login.jsp");
+        } // la sesion no es nula
+        else if (idT != null) {
+            session.setAttribute("currentTk", null);
+            if (!idT.isEmpty()) {
+                Ticket tk = null;
+                TicketDAO tD = new TicketDAO();
+                int ticketId = 0;
+                try {
+
+                    ticketId = Integer.parseInt(request.getParameter("ticketSearch"));
+                    tk = (Ticket) tD.searchTicketId(ticketId);
+                    if (tk != null) {
+                        session.setAttribute("currentTk", tk);
+                        response.sendRedirect("/Tw03/searchTicket.jsp");
+                    } else {
+                        response.sendRedirect("/Tw03/searchTicket.jsp" + "?searchTicketError"
+                                + "=Ticket not found");
+                    }
+                } catch (NumberFormatException fe) {
+                    fe.printStackTrace();
+                    fe.getMessage();
+                    response.sendRedirect("/Tw03/searchTicket.jsp" + "?searchTicketError"
+                            + "=Incorrect parameter");
+                } catch (HibernateException he) {
+                    he.printStackTrace();
+                    he.getMessage();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    e.getMessage();
+                }
+            }
+            if (idT.isEmpty()) {
+                response.sendRedirect("/Tw03/searchTicket.jsp" + "?searchTicketError"
+                        + "=Empty parameter");
+            }
+        }
+        if (idT == null) {
+            session.setAttribute("currentTk", null);
+            response.sendRedirect("/Tw03/searchTicket.jsp");
         }
     }
 

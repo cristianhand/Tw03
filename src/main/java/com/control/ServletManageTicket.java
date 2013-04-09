@@ -4,12 +4,7 @@
  */
 package com.control;
 
-import com.persistence.TicketDAO;
-import com.persistence.UserDAO;
-import com.entity.Ticket;
-import com.entity.User;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * @author meme
  */
 //@WebServlet(name = "Log", urlPatterns = {"/Log"})
-public class ServletLoging extends HttpServlet {
+public class ServletManageTicket extends HttpServlet {
 
     /**
      * Processes requests for both HTTP
@@ -36,35 +31,12 @@ public class ServletLoging extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion = request.getSession(true);
-
-        User user = null;
-        UserDAO ud = new UserDAO();
-        TicketDAO td = new TicketDAO();
-        List<Ticket> tl = null;
-
-        try {
-            user = ud.searchUserbyUserName(request.getParameter("txtUserName"), "userName");
-            System.err.println("PLPLPLPLPLPL");
-            if (user != null && user.getPassword() != null) {
-                tl = td.getTicketList();
-                sesion.setAttribute("servletTicketList", tl);
-                response.sendRedirect("/Tw03/ManageTicket.jsp");
-            } else {
-                if (user.getPassword().equals("")) {
-                    request.setAttribute("error", "LoginFail");
-                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
-                            + "username, please try again");
-                    // Utilizando Formularios jspf
-                    // <%@ include file="WEB-INF/jspf/formulariologin.jspf" %>
-                } else {
-                    response.sendRedirect("/Tw03/login.jsp" + "?error=Incorrect "
-                            + "password, please try again");
-                }
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            ex.getMessage();
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            // Not created yet. Now do so yourself.
+            response.sendRedirect("/Tw03/login.jsp");
+        } else {
+            response.sendRedirect("/Tw03/manageTicket.jsp");
         }
     }
 

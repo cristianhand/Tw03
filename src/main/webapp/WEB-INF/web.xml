@@ -5,29 +5,57 @@
             30
         </session-timeout>
     </session-config>
-    
     <!-- Servlet Login -->
     <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.control.ServletLoging</servlet-class>
+        <servlet-name>loginServlet</servlet-name>
+        <servlet-class>com.control.ServletLogin</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
+        <servlet-name>loginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlet Logout -->
+    <servlet>
+        <servlet-name>logoutServlet</servlet-name>
+        <servlet-class>com.control.ServletLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>logoutServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Servlet ManageTicket -->
+    <servlet>
+        <servlet-name>manageTicket</servlet-name>
+        <servlet-class>com.control.ServletManageTicket</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>manageTicket</servlet-name>
+        <url-pattern>/manageTicket</url-pattern>
     </servlet-mapping>
     
     <!-- Servlet SearchTicket -->
     <servlet>
-        <servlet-name>SearchTicket</servlet-name>
+        <servlet-name>searchTicket</servlet-name>
         <servlet-class>com.control.ServletSearchTicket</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>SearchTicket</servlet-name>
-        <url-pattern>/SearchTicket</url-pattern>
+        <servlet-name>searchTicket</servlet-name>
+        <url-pattern>/searchTicket</url-pattern>
     </servlet-mapping>
     
+    <filter>
+        <filter-name>noCacheFilter</filter-name>
+        <filter-class>com.control.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>noCacheFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
     
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
+    
 </web-app>
